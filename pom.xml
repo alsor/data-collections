@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ru.undev</groupId>
+  <artifactId>data-collections</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Data Collections</name>
+  <description>Collections to efficiently store arbitrary data chunks</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.10</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>it.unimi.dsi</groupId>
+  		<artifactId>fastutil</artifactId>
+  		<version>6.4.4</version>
+  	</dependency>
+  </dependencies>
+</project>
