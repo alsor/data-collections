@@ -9,11 +9,13 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ObjectOpenHashSetTest {
 
 	@Test
+	@Ignore
 	public void jdk_hash_set() throws Exception {
 		byte[] b1 = new byte[] { 1, 2, 3 };
 		byte[] b2 = new byte[] { 1, 2, 3 };
@@ -25,6 +27,7 @@ public class ObjectOpenHashSetTest {
 	}
 
 	@Test
+	@Ignore
 	public void not_contain_duplicates_when_used_for_byte_arrays() throws Exception {
 		byte[] b1 = new byte[] { 1, 2, 3 };
 		byte[] b2 = new byte[] { 1, 2, 3 };
