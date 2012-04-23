@@ -8,12 +8,10 @@ import java.nio.ByteBuffer;
 
 import util.hash.MurmurHash3;
 
-public class Bytes2BytesOpenHashMap implements Hash {
+public class Int2BytesOpenHashMap implements Hash {
 
 	/** The array of keys. */
-	public transient int[] key;
-	
-	public transient byte[] value;
+	public transient byte array[];
 	/** The array telling whether a position is used. */
 	protected transient boolean used[];
 	/** The acceptable load factor. */
@@ -31,19 +29,19 @@ public class Bytes2BytesOpenHashMap implements Hash {
 	protected final int keyLength;
 	protected final int valueLength;
 
-	public Bytes2BytesOpenHashMap(int keyLength, int valueLength) {
+	public Int2BytesOpenHashMap(int keyLength, int valueLength) {
 		this(keyLength, valueLength, DEFAULT_INITIAL_SIZE, DEFAULT_LOAD_FACTOR);
 	}
 
-	public Bytes2BytesOpenHashMap(int keyLength, int valueLength, int expected) {
+	public Int2BytesOpenHashMap(int keyLength, int valueLength, int expected) {
 		this(keyLength, valueLength, expected, DEFAULT_LOAD_FACTOR);
 	}
 
-	public Bytes2BytesOpenHashMap(int keyLength, int valueLength, float f) {
+	public Int2BytesOpenHashMap(int keyLength, int valueLength, float f) {
 		this(keyLength, valueLength, DEFAULT_INITIAL_SIZE, f);
 	}
 
-	public Bytes2BytesOpenHashMap(int keyLength, int valueLength, int expected, float f) {
+	public Int2BytesOpenHashMap(int keyLength, int valueLength, int expected, float f) {
 		if (f <= 0 || f > 1) {
 			throw new IllegalArgumentException(
 					"Load factor must be greater than 0 and smaller than or equal to 1");

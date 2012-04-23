@@ -138,7 +138,7 @@ public class FixedByteSlice2ObjectOpenHashMap<V> implements Hash {
 		return get(src.array(), keyOffset);
 	}
 
-	private V get(byte[] keySrc, int keyOffset) {
+	public V get(byte[] keySrc, int keyOffset) {
 		int pos = MurmurHash3.murmurhash3_x86_32(keySrc, keyOffset, sliceLength) & mask;
 		while (used[pos]) {
 			if (isEqualToKey(keySrc, keyOffset, pos))

@@ -136,7 +136,7 @@ public class FixedByteSlice2IntOpenHashMap implements Hash {
 		return getPos(src.array(), keyOffset);
 	}
 
-	private int getPos(byte[] keySrc, int keyOffset) {
+	public int getPos(byte[] keySrc, int keyOffset) {
 		int pos = MurmurHash3.murmurhash3_x86_32(keySrc, keyOffset, sliceLength) & mask;
 		while (used[pos]) {
 			if (isEqualToKey(keySrc, keyOffset, pos)) return pos;
