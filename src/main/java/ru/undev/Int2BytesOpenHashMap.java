@@ -74,7 +74,7 @@ public class Int2BytesOpenHashMap implements Hash {
 			rehash(arraySize(size, f));
 
 		int pos = MurmurHash3.murmurhash3_x86_32(keySrc, keyOffset, keyLength) & mask;
-		
+
 		while(used[pos]) {
 			if (isEqualToKey(keySrc, keyOffset, pos)) {
 				return pos;
@@ -120,7 +120,7 @@ public class Int2BytesOpenHashMap implements Hash {
 	}
 
 	private boolean isEqualToKey(byte[] keySrc, int keyOffset, int pos) {
-		for (int i = pos * sliceLength, j = keyOffset; j < keyLength; i++, j++) {
+		for (int i = pos * sliceLength, j = keyOffset; j < keyOffset + keyLength; i++, j++) {
 			if (array[i] != keySrc[j])
 				return false;
 		}

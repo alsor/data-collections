@@ -58,17 +58,17 @@ public class Int2FixedByteSliceOpenHashMap implements Hash {
 		used = new boolean[n];
 	}
 
-	public void put(int key, byte[] val) {
-		put(key, val, 0);
+	public void put(int k, byte[] val) {
+		put(k, val, 0);
 	}
 
-	public void put(int key, ByteBuffer val, int valOffset) {
-		put(key, val.array(), valOffset);
+	public void put(int k, ByteBuffer val, int valOffset) {
+		put(k, val.array(), valOffset);
 	}
 
 	public void put(int k, byte[] valSrc, int valOffset) {
 		int pos = it.unimi.dsi.fastutil.HashCommon.murmurHash3(k) & mask;
-		
+
 		while(used[pos]) {
 			if (key[pos] == k) {
 				copyToValue(valSrc, valOffset, pos);

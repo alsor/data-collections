@@ -71,7 +71,7 @@ public class FixedByteSlice2ObjectOpenHashMap<V> implements Hash {
 
 	public void put(byte[] keySrc, int keyOffset, V val) {
 		int pos = MurmurHash3.murmurhash3_x86_32(keySrc, keyOffset, sliceLength) & mask;
-		
+
 		while(used[pos]) {
 			if (isEqualToKey(keySrc, keyOffset, pos)) {
 				value[pos] = val;
@@ -124,7 +124,7 @@ public class FixedByteSlice2ObjectOpenHashMap<V> implements Hash {
 	}
 
 	private boolean isEqualToKey(byte[] keySrc, int keyOffset, int pos) {
-		for (int i = pos * sliceLength, j = keyOffset; j < sliceLength; i++, j++) {
+		for (int i = pos * sliceLength, j = keyOffset; j < keyOffset + sliceLength; i++, j++) {
 			if (key[i] != keySrc[j]) return false;
 		}
 		return true;
