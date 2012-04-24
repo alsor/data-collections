@@ -117,6 +117,10 @@ public class Int2FixedByteSliceOpenHashMap implements Hash {
 		System.arraycopy(value, srcPos * sliceLength, dest, destPos * sliceLength, sliceLength);
 	}
 
+	private void copyValue(int toPos, int fromPos) {
+		System.arraycopy(value, fromPos * sliceLength, value, toPos * sliceLength, sliceLength);
+	}
+
 	private void copyToValue(byte[] valSrc, int valOffset, int pos) {
 		System.arraycopy(valSrc, valOffset, value, pos * sliceLength, sliceLength);
 	}
@@ -136,6 +140,51 @@ public class Int2FixedByteSliceOpenHashMap implements Hash {
 
 	public byte[] array() {
 		return value;
+	}
+
+	/**
+	 * Shifts left entries with the specified hash code, starting at the
+	 * specified position, and empties the resulting free entry.
+	 *
+	 * @param pos
+	 *            a starting position.
+	 * @return the position cleared by the shifting process.
+	 */
+	protected final int shiftKeys(int pos) {
+		// Shift entries with the same hash.
+		int last, slot;
+		for (;;) {
+			pos = ((last = pos) + 1) & mask;
+			while (used[pos]) {
+				slot = (it.unimi.dsi.fastutil.HashCommon
+						.murmurHash3((key[pos]))) & mask;
+				if (last <= pos ? last >= slot || slot > pos : last >= slot
+						&& slot > pos)
+					break;
+				pos = (pos + 1) & mask;
+			}
+			if (!used[pos])
+				break;
+			key[last] = key[pos];
+			copyValue(last, pos);
+		}
+		used[last] = false;
+		return last;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void remove(final int k) {
+		// The starting point.
+		int pos = (it.unimi.dsi.fastutil.HashCommon.murmurHash3((k))) & mask;
+		// There's always an unused entry.
+		while (used[pos]) {
+			if (((key[pos]) == (k))) {
+				size--;
+				shiftKeys(pos);
+				return;
+			}
+			pos = (pos + 1) & mask;
+		}
 	}
 
 }
